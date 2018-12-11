@@ -1,0 +1,5 @@
+TruckState state
+Path goals
+---
+bool success
+string message

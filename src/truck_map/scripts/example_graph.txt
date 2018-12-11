@@ -1,0 +1,36 @@
+# An example file,
+# demonstrating the correct format used for Graph representation
+
+
+# This line is a comment.
+# A comment is started with a hashtag '#', and can only be declared at the start of a line.
+
+# A Node declaration starts with 'NODE' and ends with 'ENDNODE'
+#
+# The coordinates have to be in INTEGER form
+#
+# The body of the declaration consists of:
+#     1. The (x, y)-coordinates for this Node
+#     2. A list of (x, y)-coordinates for all Nodes, to which there is an out-edge from this Node
+#        The list is either separated by semicolon ';' or by a new line
+
+NODE
+    5,3
+    4,2 ; 3,5 ; 4,3
+ENDNODE
+
+NODE
+    # (x, y)-coordinates for this Node:
+    3,5
+    # Standard format for list of out-edges:
+    5,3 ; 4,3
+ENDNODE
+
+NODE
+    # (x, y)-coordinates for this Node:
+    7,8
+    # Alternative format for list of out-edges:
+    9,10
+    11,12
+    13,14
+ENDNODE

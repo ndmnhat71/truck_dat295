@@ -1,0 +1,84 @@
+<!-- pass argument like: roslaunch truck_master master.launch gamepad_rate:=50.0  -->
+
+<launch>
+  <arg name="visual" default="true"/>
+  <arg name="sim" default="true"/>
+  <arg name="rpi" default="false"/>
+  <arg name="obstacles" default="true" />
+  <arg name="path_planning" default="true"/>
+  <arg name="auto_master" default="true"/>
+  <arg name="v2i" default="false"/>
+  
+  <arg name="hw_api" default="false"/>
+  
+  <arg name="gamepad" default="true"/>
+  <arg name="gamepad_rate" default="50.0" />
+  <arg name="gamepad_type" default="xbox"/>
+  <arg name="gamepad_input" default="/dev/input/js0"/>
+  <arg name="gulliview" default="true"/>
+  
+  
+  <group if="$(arg sim)">
+    
+    <node name= "sim" pkg= "truck_automatic_ctrl" type="sim.py"/>
+    
+    
+  </group>
+  
+  <group unless="$(arg sim)">
+      
+      <node if="$(arg gulliview)" name= "gulliview" pkg= "gulliview_server" type="gulliview"/>
+      
+      <group if="$(arg hw_api)">
+         <node name="cmd_node" pkg="truck_hw_api" type="cmd_node.py" />
+         <node name="trailersensor" pkg="truck_hw_api" type="trailersensor.py"/>
+      </group>
+      
+      
+      <node name="master" pkg="truck_master" type="master.py" />
+      
+      
+      
+      <group if="$(arg gamepad)">
+        <node name="joy_node" pkg="joy" type="joy_node" >
+          <param name="autorepeat_rate" type="double" value="$(arg gamepad_rate)" />
+          <param name="coalesce_rate" type="double" value="$(eval 1.0 / arg('gamepad_rate'))" />
+          <param name="dev" type="string" value="$(arg gamepad_input)"/>
+        </node>
+
+        <node name="gamepad" pkg="truck_manual_ctrl" type="gamepad.py">
+          <param name="rate" type="double" value="$(arg gamepad_rate)" />
+          <param name="type" type="string" value="$(arg gamepad_type)" />
+        </node>
+      
+      </group>
+
+  
+  </group>
+  
+  
+  <group if="$(arg visual)" >
+        <node name= "visualization" pkg= "truck_visualization" type="visualization.py"/>
+        <node name="rviz" pkg="rviz" type="rviz" args="-d $(find truck_visualization)/config.rviz" />
+  </group>
+
+ <group if="$(arg v2i)">
+    <node name="section_identifier" pkg="section_identifier" type="section_identifier.py" />
+    <node name="section_lock" pkg="section_lock" type="section_lock.py" />
+  </group>
+  
+  
+  <node if="$(arg path_planning)" name="path_planning" pkg= "path_planning" type="path_planning_node.py">
+     <param name="rpi" type="boolean" value="$(arg rpi)"/>
+  </node>
+  
+  <node if="$(arg auto_master)" name= "auto_master" pkg= "truck_automatic_ctrl" type="auto_master.py">
+     <param name="sim" type="boolean" value="$(arg sim)"/>
+  </node>
+  
+  <node if="$(arg obstacles)" name="obstacle_node" pkg="truck_map" type="obstacle_node.py"/> 
+  
+  
+  
+  
+</launch>

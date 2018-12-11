@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="VcsDirectoryMappings">
+    <mapping directory="$PROJECT_DIR$/custom_msgs" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/gulliview_server" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/path_planning" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/section_identifier" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/section_lock" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/truck_automatic_ctrl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/truck_manual_ctrl" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/truck_map" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/truck_master" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/truck_visualization" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/zooinspector" vcs="Git" />
+    <mapping directory="$PROJECT_DIR$/zookeeper" vcs="Git" />
+  </component>
+</project>
