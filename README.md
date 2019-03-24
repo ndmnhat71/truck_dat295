@@ -6,3 +6,4 @@ This is DAT295 project.
 - Source devel/setup.bash
 - Run "roslaunch truck_master master.launch"
 
+2. Demo video
