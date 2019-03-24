@@ -33,6 +33,8 @@ class SectionIdentifier:
 
         elif 2600 < x < 3850 and 5700 < y < 7500:
             self.msg = "Intersection_3"
+        else:
+            self.msg = "road"
 
         if self.msg != "" and self.msg != self.msg_old:
             print self.msg
@@ -44,4 +46,4 @@ if __name__ == '__main__':
     s = SectionIdentifier()
 
     # spin() simply keeps python from exiting until this node is stopped
-    rospy.spin()
+rospy.spin()
